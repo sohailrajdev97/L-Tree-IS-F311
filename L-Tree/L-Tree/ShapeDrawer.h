@@ -23,6 +23,17 @@ private:
         *b = d;
     }
     
+    void plotCircle(GLint xi,GLint yi,GLint xc,GLint yc){
+		drawPixel(xi+xc,yi+yc);
+		drawPixel(xi+xc,yc-yi);
+		drawPixel(xc-xi,yc+yi);
+		drawPixel(xc-xi,yc-yi);
+		drawPixel(xc+yi,yc+xi);
+		drawPixel(xc+yi,yc-xi);
+		drawPixel(xc-yi,yc+xi);
+		drawPixel(xc-yi,yc-xi);
+	}
+    
 public:
     
     ShapeDrawer(){
@@ -84,7 +95,26 @@ public:
                 x = x + xDirection;
             
         }
-    }
+    } 
+
+	void drawCircle(GLint x0,GLint y0,GLint r0){
+		GLint x = 0;
+		GLint y = r0;
+		GLint pixel = 1-r0;
+	
+		while(x <= y){
+			plotCircle(x,y,x0,y0);
+	
+		if(pixel<0){
+			pixel = pixel+2*x+3;
+		}
+		else {
+			pixel = pixel+2*(x-y)+5;
+			y--;
+		}
+		x++;
+		}
+	}
 };
 
 
