@@ -89,5 +89,4 @@ public:
 
 
 #endif
-
 /* ShapeDrawer_h */
