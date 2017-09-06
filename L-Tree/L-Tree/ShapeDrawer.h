@@ -7,6 +7,8 @@
 #include <GL/gl.h>
 #endif
 
+#define direction(x1, x2) ((x2 > x1) ? 1 : -1)
+
 #include <cstdlib>
 
 class ShapeDrawer {
@@ -49,15 +51,8 @@ public:
         int xDirection = 0, yDirection = 0, swapStatus = 0;
         int i, x = x1, y = y1;
         
-        if(x2 > x1)
-            xDirection = 1;
-        else if(x2 < x1)
-            xDirection = -1;
-        
-        if(y2 > y1)
-            yDirection = 1;
-        else if (y2 < y1)
-            yDirection = -1;
+        xDirection = direction(x1, x2);
+        yDirection = direction(y1, y2);
         
         if(dy > dx){
             swap(&dy, &dx);
@@ -71,26 +66,23 @@ public:
         for(i = 1; i <= dx; i++){
             drawPixel(x, y);
             
-            if(d >= 0){
-                if(swapStatus){
+            if(d >= 0)
+            {
+                if(swapStatus)
                     x = x + xDirection;
-                    d = d + dNE;
-                } else {
+                else
                     y = y + yDirection;
-                    d = d + dNE;
-                }
-            } else {
-                if(swapStatus){
-                    d = d + dE;
-                } else {
-                    d = d + dE;
-                }
+                
+                d = d + dNE;
             }
+            else
+                d = d + dE;
             
             if(swapStatus)
                 y = y + yDirection;
             else
                 x = x + xDirection;
+            
         }
     }
 };
