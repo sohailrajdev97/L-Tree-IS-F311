@@ -6,7 +6,6 @@
 #else
 #include <GL/gl.h>
 #endif
-
 #define direction(x1, x2) ((x2 > x1) ? 1 : -1)
 
 #include <cstdlib>
