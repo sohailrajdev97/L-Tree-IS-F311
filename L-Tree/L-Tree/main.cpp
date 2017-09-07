@@ -20,19 +20,19 @@ void draw() {
     glClear(GL_COLOR_BUFFER_BIT);
     
     ShapeDrawer sd;
-    sd.setColour(1);
     
-    sd.drawLine(0,0,640,480);
-    sd.drawLine(0, 480, 640, 0);
-    sd.drawLine(0, 240, 640, 240);
-    sd.drawLine(320, 0, 320, 480);
+    sd.drawLine(320, 0, 320, 200);
     
-    sd.setColour(0,1);
-    sd.drawLine(0, 0, 320, 480);
-    sd.drawLine(0, 480, 150, 0);
-    sd.drawLine(150, 0, 640, 480);
-    
-    
+    sd.randomizeColour();
+    sd.drawCircle(320, 330, 130);
+    sd.randomizeColour();
+    sd.drawCircle(320, 330, 100);
+    sd.randomizeColour();
+    sd.drawCircle(320, 330, 70);
+    sd.randomizeColour();
+    sd.drawCircle(320, 330, 40);
+    sd.randomizeColour();
+    sd.drawCircle(320, 330, 10);
     glFlush();
 }
 

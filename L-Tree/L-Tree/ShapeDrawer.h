@@ -10,6 +10,7 @@
 #define direction(x1, x2) ((x2 > x1) ? 1 : -1)
 
 #include <cstdlib>
+#include <ctime>
 
 class ShapeDrawer {
     
@@ -40,6 +41,13 @@ public:
         this->red = 1.0;
         this->green = 1.0;
         this->blue = 1.0;
+        srand((unsigned int)time(NULL));
+    }
+    
+    void randomizeColour(){
+        this->red = ((double)(rand()%100))/100;
+        this->green = ((double)(rand()%100))/100;
+        this->blue = ((double)(rand()%100))/100;
     }
     
     void setColour(GLfloat red = 0.0, GLfloat green = 0.0, GLfloat blue = 0.0){
