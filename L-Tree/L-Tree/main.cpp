@@ -32,7 +32,10 @@ void draw() {
     sd.randomizeColour();
     sd.drawCircle(320, 330, 40);
     sd.randomizeColour();
+    sd.drawCircle(320, 330, 25);
+    sd.randomizeColour();
     sd.drawCircle(320, 330, 10);
+
     glFlush();
 }
 
