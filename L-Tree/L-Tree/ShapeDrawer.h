@@ -26,13 +26,36 @@ private:
     
     void plotCircle(GLint xi,GLint yi,GLint xc,GLint yc){
 		drawPixel(xi+xc,yi+yc);
+        drawPixel(xi+xc,yi+yc+1);
+        drawPixel(xi+xc,yi+yc-1);
+        
 		drawPixel(xi+xc,yc-yi);
+        drawPixel(xi+xc,yc-yi+1);
+        drawPixel(xi+xc,yc-yi-1);
+        
 		drawPixel(xc-xi,yc+yi);
+        drawPixel(xc-xi,yc+yi+1);
+        drawPixel(xc-xi,yc+yi-1);
+        
 		drawPixel(xc-xi,yc-yi);
+        drawPixel(xc-xi,yc-yi+1);
+        drawPixel(xc-xi,yc-yi-1);
+        
 		drawPixel(xc+yi,yc+xi);
+        drawPixel(xc+yi+1,yc+xi);
+        drawPixel(xc+yi-1,yc+xi);
+        
 		drawPixel(xc+yi,yc-xi);
+        drawPixel(xc+yi+1,yc-xi);
+        drawPixel(xc+yi-1,yc-xi);
+        
 		drawPixel(xc-yi,yc+xi);
+        drawPixel(xc-yi+1,yc+xi);
+        drawPixel(xc-yi-1,yc+xi);
+        
 		drawPixel(xc-yi,yc-xi);
+        drawPixel(xc-yi+1,yc-xi);
+        drawPixel(xc-yi-1,yc-xi);
 	}
     
 public:
@@ -97,10 +120,14 @@ public:
             else
                 d = d + dE;
             
-            if(swapStatus)
+            if(swapStatus){
                 y = y + yDirection;
-            else
+                drawPixel(x+1, y);
+            }
+            else{
                 x = x + xDirection;
+                drawPixel(x, y+1);
+            }
             
         }
     } 
