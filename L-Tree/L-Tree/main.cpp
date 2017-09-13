@@ -7,12 +7,15 @@
 #include "ShapeDrawer.h"
 
 void init() {
+    int screenWidth = glutGet(GLUT_SCREEN_WIDTH);
+    int screenHeight = glutGet(GLUT_SCREEN_HEIGHT);
+    
     glutInitDisplayMode(GLUT_SINGLE|GLUT_RGB);
-    glutInitWindowPosition(0,0);
-    glutInitWindowSize(640, 480);
+    glutInitWindowPosition(0, 0);
+    glutInitWindowSize(screenWidth, screenHeight);
     glutCreateWindow("Lines");
-    glClearColor(0.0,0.0,0.0,0);
-    gluOrtho2D(0,640,0,480);
+    glClearColor(0.0, 0.0, 0.0, 0);
+    gluOrtho2D(0, screenWidth, 0, screenHeight);
     
 }
 
