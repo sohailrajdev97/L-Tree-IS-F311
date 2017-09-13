@@ -4,7 +4,8 @@
 #include <GL/glut.h>
 #endif
 
-#include "ShapeDrawer.h"
+#include <iostream>
+#include "Lindenmayer.h"
 
 void init() {
     int screenWidth = glutGet(GLUT_SCREEN_WIDTH);
@@ -21,21 +22,12 @@ void init() {
 
 void draw() {
     glClear(GL_COLOR_BUFFER_BIT);
+    Lindenmayer tree1;
+    tree1.setAxiom("peg");
+    tree1.addRule("e=eie");
+    std::cout<<tree1.getAxiom()<<endl;
+    tree1.draw(3);
     
-    ShapeDrawer sd;
-    
-    sd.drawLine(320, 0, 320, 200);
-    
-    sd.randomizeColour();
-    sd.drawCircle(320, 330, 130);
-    sd.randomizeColour();
-    sd.drawCircle(320, 330, 100);
-    sd.randomizeColour();
-    sd.drawCircle(320, 330, 70);
-    sd.randomizeColour();
-    sd.drawCircle(320, 330, 40);
-    sd.randomizeColour();
-    sd.drawCircle(320, 330, 10);
     glFlush();
 }
 
