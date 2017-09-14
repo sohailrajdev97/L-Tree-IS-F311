@@ -12,6 +12,7 @@ using namespace std;
 struct coordinates {
     int x;
     int y;
+    double angle;
 };
 
 class Lindenmayer {
@@ -131,6 +132,7 @@ public:
                 struct coordinates a;
                 a.x = currentX;
                 a.y = currentY;
+                a.angle = currentAngle;
                 coordinateStack.push(a);
             }
             
@@ -138,6 +140,7 @@ public:
                 struct coordinates a = coordinateStack.top();
                 currentX = a.x;
                 currentY = a.y;
+                currentAngle = a.angle;
                 coordinateStack.pop();
             }
             
