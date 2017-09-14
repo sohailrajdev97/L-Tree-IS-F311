@@ -11,6 +11,7 @@
 
 #include <cstdlib>
 #include <ctime>
+#include <cmath>
 
 class ShapeDrawer {
     
@@ -25,37 +26,16 @@ private:
     }
     
     void plotCircle(GLint xi,GLint yi,GLint xc,GLint yc){
+        
 		drawPixel(xi+xc,yi+yc);
-        drawPixel(xi+xc,yi+yc+1);
-        drawPixel(xi+xc,yi+yc-1);
-        
 		drawPixel(xi+xc,yc-yi);
-        drawPixel(xi+xc,yc-yi+1);
-        drawPixel(xi+xc,yc-yi-1);
-        
 		drawPixel(xc-xi,yc+yi);
-        drawPixel(xc-xi,yc+yi+1);
-        drawPixel(xc-xi,yc+yi-1);
-        
 		drawPixel(xc-xi,yc-yi);
-        drawPixel(xc-xi,yc-yi+1);
-        drawPixel(xc-xi,yc-yi-1);
-        
 		drawPixel(xc+yi,yc+xi);
-        drawPixel(xc+yi+1,yc+xi);
-        drawPixel(xc+yi-1,yc+xi);
-        
 		drawPixel(xc+yi,yc-xi);
-        drawPixel(xc+yi+1,yc-xi);
-        drawPixel(xc+yi-1,yc-xi);
-        
-		drawPixel(xc-yi,yc+xi);
-        drawPixel(xc-yi+1,yc+xi);
-        drawPixel(xc-yi-1,yc+xi);
-        
+		drawPixel(xc-yi,yc+xi);        
 		drawPixel(xc-yi,yc-xi);
-        drawPixel(xc-yi+1,yc-xi);
-        drawPixel(xc-yi-1,yc-xi);
+        
 	}
     
 public:
@@ -120,17 +100,23 @@ public:
             else
                 d = d + dE;
             
-            if(swapStatus){
+            if(swapStatus)
                 y = y + yDirection;
-                drawPixel(x+1, y);
-            }
-            else{
+            else
                 x = x + xDirection;
-                drawPixel(x, y+1);
-            }
+            
             
         }
-    } 
+    }
+    
+    void drawLineAtAngle(GLint x1, GLint y1, double angle, double length){
+        
+        int x2 = round(x1 + (length*cos(angle*M_PI/180)));
+        int y2 = round(y1 + (length*sin(angle*M_PI/180)));
+        
+        drawLine(x1, y1, x2, y2);
+    
+    }
 
 	void drawCircle(GLint x0,GLint y0,GLint r0){
 		GLint x = 0;

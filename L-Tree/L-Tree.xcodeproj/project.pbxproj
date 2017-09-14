@@ -25,6 +25,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		EE31CECF1F69B25400C8BF2D /* Lindenmayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Lindenmayer.h; sourceTree = "<group>"; };
 		EEC018E41F603779006201A0 /* L-Tree */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "L-Tree"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEC018E71F603779006201A0 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		EEC018EF1F6037CA006201A0 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -67,6 +68,7 @@
 			children = (
 				EEC018E71F603779006201A0 /* main.cpp */,
 				EEC018F31F603BA1006201A0 /* ShapeDrawer.h */,
+				EE31CECF1F69B25400C8BF2D /* Lindenmayer.h */,
 			);
 			path = "L-Tree";
 			sourceTree = "<group>";
@@ -271,6 +273,7 @@
 				EEC018ED1F603779006201A0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

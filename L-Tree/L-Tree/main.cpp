@@ -22,11 +22,15 @@ void init() {
 
 void draw() {
     glClear(GL_COLOR_BUFFER_BIT);
+    double colors[][3] = {{1.0, 1.0, 0.0}, {0.0, 1.0, 0.0}, {1.0, 0.0, 0.0}};
     Lindenmayer tree1;
-    tree1.setAxiom("peg");
-    tree1.addRule("e=eie");
+    tree1.setX(300);
+    tree1.setY(0);
+    tree1.setAngle(25);
+    tree1.setAxiom("FX");
+    tree1.addRule("F=C0FF-[C1-F+F]+[C2+F-F]");
     std::cout<<tree1.getAxiom()<<endl;
-    tree1.draw(3);
+    tree1.draw(5, colors);
     
     glFlush();
 }

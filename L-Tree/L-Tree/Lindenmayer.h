@@ -3,10 +3,16 @@
 
 #include <string>
 #include <map>
+#include <stack>
 #include <iostream>
 #include "ShapeDrawer.h"
 
 using namespace std;
+
+struct coordinates {
+    int x;
+    int y;
+};
 
 class Lindenmayer {
     
@@ -16,14 +22,15 @@ private:
     double rotationAngle;
     string axiom;
     map<string, string> rules;
+    stack<coordinates> coordinateStack;
     ShapeDrawer sd;
 
 public:
     
     // Constructor
     Lindenmayer(){
-        currentX = 0.0;
-        currentY = 0.0;
+        currentX = 0;
+        currentY = 0;
         rotationAngle = 0.0;
     }
     
@@ -67,7 +74,7 @@ public:
     }
     
     //Draw Function
-    void draw(int iterations){
+    void draw(int iterations, double colors[][3] = NULL){
         
         int i,j;
         map<string, string>::iterator it;
@@ -91,7 +98,51 @@ public:
             generation = tGeneration;
             tGeneration = "";
         }
-        cout << generation;
+        
+        
+        cout << generation << endl;
+        
+        size_t length = generation.length();
+        double currentAngle = 0.0;
+        
+        for(i=0; i < length; i++){
+            
+            char next = generation.at(i);
+            
+            if(next == 'F'){
+                sd.drawLineAtAngle(currentX, currentY, 90 - currentAngle, 10);
+                currentX += 10*sin(currentAngle*M_PI/180);
+                currentY += 10*cos(currentAngle*M_PI/180);
+            }
+            
+            if(next == '-')
+                currentAngle += rotationAngle;
+            
+            if(next == '+')
+                currentAngle -= rotationAngle;
+            
+            if(next == 'C'){
+                int colorNum = generation.at(i+1) - 48;
+                sd.setColour(colors[colorNum][0], colors[colorNum][1], colors[colorNum][2]);
+                i = i+1;
+            }
+            
+            if(next == '[') {
+                struct coordinates a;
+                a.x = currentX;
+                a.y = currentY;
+                coordinateStack.push(a);
+            }
+            
+            if(next == ']') {
+                struct coordinates a = coordinateStack.top();
+                currentX = a.x;
+                currentY = a.y;
+                coordinateStack.pop();
+            }
+            
+            
+        }
     }
 };
 
