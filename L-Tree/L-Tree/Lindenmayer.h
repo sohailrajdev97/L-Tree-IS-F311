@@ -10,9 +10,8 @@
 using namespace std;
 
 struct turtleState {
-    int x;
-    int y;
-    double angle, red, green, blue;
+    int x, y;
+    double branchLength, angle, red, green, blue;
 };
 
 class Lindenmayer {
@@ -20,7 +19,7 @@ class Lindenmayer {
 private:
     
     int currentX, currentY;
-    double rotationAngle;
+    double branchLength, rotationAngle, branchScaleFactor;
     string axiom;
     map<string, string> rules;
     stack<turtleState> stateStack;
@@ -33,6 +32,8 @@ public:
         currentX = 0;
         currentY = 0;
         rotationAngle = 0.0;
+        branchLength = 100;
+        branchScaleFactor = 0.82;
     }
     
     // Setters
@@ -106,6 +107,7 @@ public:
         size_t length = generation.length();
         
         double currentAngle = 0.0;
+        double currentBranchLength = branchLength;
         double red = 1, green = 1, blue = 1;
         
         for(i=0; i < length; i++){
@@ -113,9 +115,9 @@ public:
             char next = generation.at(i);
             
             if(next == 'F'){
-                sd.drawLineAtAngle(currentX, currentY, 90 - currentAngle, 10);
-                currentX += 10*sin(toRadians(currentAngle));
-                currentY += 10*cos(toRadians(currentAngle));
+                sd.drawLineAtAngle(currentX, currentY, 90 - currentAngle, currentBranchLength);
+                currentX += currentBranchLength*sin(toRadians(currentAngle));
+                currentY += currentBranchLength*cos(toRadians(currentAngle));
             }
             
             if(next == '-')
@@ -137,21 +139,30 @@ public:
                 struct turtleState currentState;
                 currentState.x = currentX;
                 currentState.y = currentY;
+                
+                currentState.branchLength = currentBranchLength;
                 currentState.angle = currentAngle;
+
                 currentState.red = red;
                 currentState.green = green;
                 currentState.blue = blue;
                 stateStack.push(currentState);
+                currentBranchLength *= branchScaleFactor;
             }
             
             if(next == ']') {
                 struct turtleState newState = stateStack.top();
+                
                 currentX = newState.x;
                 currentY = newState.y;
+                
                 currentAngle = newState.angle;
+                currentBranchLength = newState.branchLength;
+                
                 red = newState.red;
                 green = newState.green;
                 blue = newState.blue;
+                
                 sd.setColour(red, green, blue);
                 stateStack.pop();
             }
