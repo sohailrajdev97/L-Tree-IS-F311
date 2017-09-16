@@ -39,6 +39,11 @@ public:
     void setX(int x) {
         currentX = x;
     }
+
+    void angleConvert(double ang){
+        double x = ang*M_PI/180;
+        return x;
+    }
     
     void setY(int y){
         currentY = y;
@@ -112,8 +117,8 @@ public:
             
             if(next == 'F'){
                 sd.drawLineAtAngle(currentX, currentY, 90 - currentAngle, 10);
-                currentX += 10*sin(currentAngle*M_PI/180);
-                currentY += 10*cos(currentAngle*M_PI/180);
+                currentX += 10*sin(angleConvert(currentAngle));
+                currentY += 10*cos(angleConvert(currentAngle));
             }
             
             if(next == '-')
