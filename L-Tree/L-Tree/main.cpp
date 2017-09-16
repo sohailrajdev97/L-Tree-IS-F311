@@ -57,12 +57,12 @@ void draw() {
     
     Lindenmayer tree1;
     tree1.setX(500);
-    tree1.setY(50);
+    tree1.setY(screenHeight/16);
     tree1.setAngle(22.5);
+    tree1.setBranchLength(0.111*screenHeight);
+    tree1.setBranchScaleFactor(0.82);
     tree1.setAxiom("XF");
     tree1.addRule("F=C0F[C1+FX][F[C2+FX][FX][C2-FX]][C1-FX]");
-    tree1.addRule("F=FF");
-    std::cout<<tree1.getAxiom()<<endl;
     tree1.draw(6, colors);
     glFlush();
     

@@ -33,7 +33,7 @@ public:
         currentY = 0;
         rotationAngle = 0.0;
         branchLength = 100;
-        branchScaleFactor = 0.82;
+        branchScaleFactor = 0.75;
     }
     
     // Setters
@@ -51,6 +51,14 @@ public:
     
     void setAxiom(string axiom){
         this->axiom = axiom;
+    }
+    
+    void setBranchLength(double branchLength){
+        this->branchLength = branchLength;
+    }
+    
+    void setBranchScaleFactor(double branchScaleFactor){
+        this->branchScaleFactor = branchScaleFactor;
     }
     
     void addRule(string rule){
@@ -73,6 +81,14 @@ public:
     
     string getAxiom(){
         return axiom;
+    }
+    
+    double getBranchLength(){
+        return branchLength;
+    }
+    
+    double getBranchScaleFactor(){
+        return branchScaleFactor;
     }
     
     //Draw Function
@@ -100,9 +116,7 @@ public:
             generation = tGeneration;
             tGeneration = "";
         }
-        
-        
-        cout << generation << endl;
+
         
         size_t length = generation.length();
         
