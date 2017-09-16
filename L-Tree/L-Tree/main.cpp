@@ -52,12 +52,12 @@ void draw() {
     int i;
     double gradient = 1.0;
     for(i=0; i < screenHeight/8; i++){
-        sd.setColour(0,gradient,0);
+        sd.setColour(gradient/2,gradient,0.0);
         gradient -= 4.0/screenHeight;
         sd.drawLine(0, i, screenWidth, i);
     }
 
-    double colors[][3] = {{0.545, 0.270, 0.074}, {0.0, 1.0, 0.0}, {0.0, 0.0, 1.0}};
+    double colors1[][3] = {{0.111, 0.111, 0.439}, {0.576, 0.458, 0.858}, {0.545, 0.0, 0.545}};
     
     Lindenmayer tree1;
     tree1.setX(500);
@@ -67,12 +67,13 @@ void draw() {
     tree1.setBranchScaleFactor(0.82);
     tree1.setAxiom("XF");
     tree1.addRule("F=C0F[C1+FX][F[C2+FX][FX][C2-FX]][C1-FX]");
-    tree1.draw(6, colors);
+    tree1.draw(6, colors1);
     
+    double colors2[][3] = {{0.501, 0.0, 0.0}, {0.980, 0.501, 0.4470}, {0.862, 0.078, 0.235}};
     tree1.setX(1000);
     tree1.setY(screenHeight/8);
     tree1.setBranchLength(0.065*screenHeight);
-    tree1.draw(6, colors);
+    tree1.draw(6, colors2);
     glFlush();
     
 }
