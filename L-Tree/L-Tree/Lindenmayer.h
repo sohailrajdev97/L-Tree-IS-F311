@@ -40,7 +40,7 @@ public:
         currentX = x;
     }
 
-    void angleConvert(double ang){
+    double angleConvert(double ang){
         double x = ang*M_PI/180;
         return x;
     }
