@@ -9,10 +9,10 @@
 
 using namespace std;
 
-struct coordinates {
+struct turtleState {
     int x;
     int y;
-    double angle;
+    double angle, red, green, blue;
 };
 
 class Lindenmayer {
@@ -23,7 +23,7 @@ private:
     double rotationAngle;
     string axiom;
     map<string, string> rules;
-    stack<coordinates> coordinateStack;
+    stack<turtleState> stateStack;
     ShapeDrawer sd;
 
 public:
@@ -104,7 +104,9 @@ public:
         cout << generation << endl;
         
         size_t length = generation.length();
+        
         double currentAngle = 0.0;
+        double red = 1, green = 1, blue = 1;
         
         for(i=0; i < length; i++){
             
@@ -124,24 +126,34 @@ public:
             
             if(next == 'C'){
                 int colorNum = generation.at(i+1) - 48;
-                sd.setColour(colors[colorNum][0], colors[colorNum][1], colors[colorNum][2]);
+                red = colors[colorNum][0];
+                green = colors[colorNum][1];
+                blue = colors[colorNum][2];
+                sd.setColour(red, green, blue);
                 i = i+1;
             }
             
             if(next == '[') {
-                struct coordinates a;
-                a.x = currentX;
-                a.y = currentY;
-                a.angle = currentAngle;
-                coordinateStack.push(a);
+                struct turtleState currentState;
+                currentState.x = currentX;
+                currentState.y = currentY;
+                currentState.angle = currentAngle;
+                currentState.red = red;
+                currentState.green = green;
+                currentState.blue = blue;
+                stateStack.push(currentState);
             }
             
             if(next == ']') {
-                struct coordinates a = coordinateStack.top();
-                currentX = a.x;
-                currentY = a.y;
-                currentAngle = a.angle;
-                coordinateStack.pop();
+                struct turtleState newState = stateStack.top();
+                currentX = newState.x;
+                currentY = newState.y;
+                currentAngle = newState.angle;
+                red = newState.red;
+                green = newState.green;
+                blue = newState.blue;
+                sd.setColour(red, green, blue);
+                stateStack.pop();
             }
             
             
