@@ -51,7 +51,7 @@ void draw() {
     
     int i;
     for(i=0; i < screenHeight/8; i++){
-        sd.drawLine(0, i, screenWidth, i - screenHeight/16);
+        sd.drawLine(0, i, screenWidth, i);
     }
     double colors[][3] = {{0.545, 0.270, 0.074}, {0.0, 1.0, 0.0}, {0.0, 0.0, 1.0}};
     
