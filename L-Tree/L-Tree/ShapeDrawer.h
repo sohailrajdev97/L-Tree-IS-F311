@@ -122,15 +122,22 @@ public:
 		GLint x = 0;
 		GLint y = r0;
 		GLint pixel = 1-r0;
+        GLint pixelChangeE = 3;
+        GLint pixelChangeSE = -2*r0+5;
 	
 		while(x <= y){
 			plotCircle(x,y,x0,y0);
 	
 		if(pixel<0){
-			pixel = pixel+2*x+3;
+			pixel = pixel+pixelChangeE;
+            pixelChangeE = pixelChangeE+2;
+            pixelChangeSE = pixelChangeSE+2;
 		}
 		else {
-			pixel = pixel+2*(x-y)+5;
+			pixel = pixel+pixelChangeSE;
+            pixelChangeE = pixelChangeE+2;
+            pixelChangeSE = pixelChangeSE+4;
+
 			y--;
 		}
 		x++;
