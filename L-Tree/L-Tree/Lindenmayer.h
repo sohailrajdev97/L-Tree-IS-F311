@@ -20,7 +20,7 @@ private:
     
     int currentX, currentY;
     double branchLength, rotationAngle, branchScaleFactor;
-    string axiom;
+    string axiom, generation;
     map<string, string> rules;
     stack<turtleState> stateStack;
     ShapeDrawer sd;
@@ -34,6 +34,7 @@ public:
         rotationAngle = 0.0;
         branchLength = 100;
         branchScaleFactor = 0.75;
+        generation = "";
     }
     
     // Setters
@@ -95,28 +96,33 @@ public:
     void draw(int iterations, double colors[][3] = NULL){
         
         int i,j;
-        map<string, string>::iterator it;
-        string generation = axiom;
-        string tGeneration = "";
         
-        for(i=0; i < iterations; i++){
+        cout << generation.length();
+        
+        if(generation.length() == 0)
+        {
+            map<string, string>::iterator it;
+            generation = axiom;
+            string tGeneration = "";
             
-            size_t length = generation.length();
-            
-            for(j=0; j < length; j++){
+            for(i=0; i < iterations; i++){
                 
-                it = rules.find(generation.substr(j, 1));
+                size_t length = generation.length();
                 
-                if(it != rules.end()){
-                    tGeneration = tGeneration + rules.at(generation.substr(j, 1));
-                } else {
-                    tGeneration = tGeneration + generation.substr(j, 1);
+                for(j=0; j < length; j++){
+                    
+                    it = rules.find(generation.substr(j, 1));
+                    
+                    if(it != rules.end()){
+                        tGeneration = tGeneration + rules.at(generation.substr(j, 1));
+                    } else {
+                        tGeneration = tGeneration + generation.substr(j, 1);
+                    }
                 }
+                generation = tGeneration;
+                tGeneration = "";
             }
-            generation = tGeneration;
-            tGeneration = "";
         }
-
         
         size_t length = generation.length();
         
