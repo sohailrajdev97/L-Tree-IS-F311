@@ -7,11 +7,12 @@
 #include <GL/gl.h>
 #endif
 
-#define direction(x1, x2) ((x2 > x1) ? 1 : -1)
-
 #include <cstdlib>
 #include <ctime>
 #include <cmath>
+
+#define direction(x1, x2) ((x2 > x1) ? 1 : -1)
+#define toRadians(degrees) ((double)degrees * M_PI)/180
 
 class ShapeDrawer {
     
@@ -111,38 +112,37 @@ public:
     
     void drawLineAtAngle(GLint x1, GLint y1, double angle, double length){
         
-        int x2 = round(x1 + (length*cos(angle*M_PI/180)));
-        int y2 = round(y1 + (length*sin(angle*M_PI/180)));
+        int x2 = round(x1 + (length*cos(toRadians(angle))));
+        int y2 = round(y1 + (length*sin(toRadians(angle))));
         
         drawLine(x1, y1, x2, y2);
     
     }
 
-	void drawCircle(GLint x0,GLint y0,GLint r0){
-		GLint x = 0;
-		GLint y = r0;
-		GLint pixel = 1-r0;
-        GLint pixelChangeE = 3;
-        GLint pixelChangeSE = -2*r0+5;
-	
-		while(x <= y){
-			plotCircle(x,y,x0,y0);
-	
-		if(pixel<0){
-			pixel = pixel+pixelChangeE;
-            pixelChangeE = pixelChangeE+2;
-            pixelChangeSE = pixelChangeSE+2;
-		}
-		else {
-			pixel = pixel+pixelChangeSE;
-            pixelChangeE = pixelChangeE+2;
-            pixelChangeSE = pixelChangeSE+4;
-
-			y--;
-		}
-		x++;
-		}
-	}
+    void drawCircle(GLint x0,GLint y0,GLint r0){
+        GLint x = 0;
+        GLint y = r0;
+        GLint d = 1-r0;
+        GLint deltaE = 3;
+        GLint deltaSE = -2*r0+5;
+        
+        while(x <= y){
+            plotCircle(x,y,x0,y0);
+            
+            if(d<0){
+                d = d+deltaE;
+                deltaE = deltaE+2;
+                deltaSE = deltaSE+2;
+            }
+            else {
+                d = d+deltaSE;
+                deltaE = deltaE+2;
+                deltaSE = deltaSE+4;
+                y--;
+            }
+            x++;
+        }
+    }
 };
 
 
