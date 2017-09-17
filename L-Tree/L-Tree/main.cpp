@@ -82,6 +82,8 @@ void draw() {
     tree.setAngle(22.5);
     tree.setBranchLength(0.111*screenHeight);
     tree.setBranchScaleFactor(0.82);
+    tree.setPointSize(3);
+    tree.setPointScaleFactor(0.8);
     tree.setAxiom("F");
     tree.addRule("F=C0F[C1+F][F[C2+F][F][C2-F]][C1-F]");
     tree.draw(6, leftTreeColors);

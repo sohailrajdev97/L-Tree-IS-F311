@@ -11,7 +11,7 @@ using namespace std;
 
 struct turtleState {
     int x, y;
-    double branchLength, angle, red, green, blue;
+    double branchLength, angle, red, green, blue, pointSize;
 };
 
 class Lindenmayer {
@@ -19,7 +19,7 @@ class Lindenmayer {
 private:
     
     int currentX, currentY;
-    double branchLength, rotationAngle, branchScaleFactor;
+    double branchLength, pointSize, rotationAngle, branchScaleFactor, pointScaleFactor;
     string axiom, generation;
     map<string, string> rules;
     stack<turtleState> stateStack;
@@ -35,6 +35,8 @@ public:
         branchLength = 100;
         branchScaleFactor = 0.75;
         generation = "";
+        pointSize = 1.0;
+        pointScaleFactor = 1.0;
     }
     
     // Setters
@@ -60,6 +62,15 @@ public:
     
     void setBranchScaleFactor(double branchScaleFactor){
         this->branchScaleFactor = branchScaleFactor;
+    }
+    
+    void setPointScaleFactor(double pointScaleFactor){
+        this->pointScaleFactor = pointScaleFactor;
+    }
+    
+    void setPointSize(double pointSize){
+        this->pointSize = pointSize;
+        sd.setPointSize(pointSize);
     }
     
     void addRule(string rule){
@@ -90,6 +101,14 @@ public:
     
     double getBranchScaleFactor(){
         return branchScaleFactor;
+    }
+    
+    double getPointSize(){
+        return pointSize;
+    }
+    
+    double getPointScaleFactor() {
+        return pointScaleFactor;
     }
     
     //Draw Function
@@ -126,6 +145,7 @@ public:
         
         double currentAngle = 0.0;
         double currentBranchLength = branchLength;
+        double currentPointSize = pointSize;
         double red = 1, green = 1, blue = 1;
         
         for(i=0; i < length; i++){
@@ -159,13 +179,18 @@ public:
                 currentState.y = currentY;
                 
                 currentState.branchLength = currentBranchLength;
+                currentState.pointSize = currentPointSize;
                 currentState.angle = currentAngle;
 
                 currentState.red = red;
                 currentState.green = green;
                 currentState.blue = blue;
                 stateStack.push(currentState);
+                
                 currentBranchLength *= branchScaleFactor;
+                currentPointSize *= pointScaleFactor;
+                
+                sd.setPointSize(currentPointSize);
             }
             
             if(next == ']') {
@@ -176,18 +201,22 @@ public:
                 
                 currentAngle = newState.angle;
                 currentBranchLength = newState.branchLength;
+                currentPointSize = newState.pointSize;
                 
                 red = newState.red;
                 green = newState.green;
                 blue = newState.blue;
                 
                 sd.setColour(red, green, blue);
+                sd.setPointSize(pointSize);
                 stateStack.pop();
             }
             
             
         }
+
     }
+    
 };
 
 #endif /* Lindenmayer_h */
