@@ -19,7 +19,7 @@ class ShapeDrawer {
     
 private:
     
-    GLfloat red, green, blue;
+    GLfloat red, green, blue, pointSize;
     
     void swap(int *a, int *b){
         // A method to swap two numbers.
@@ -49,6 +49,7 @@ public:
         this->red = 1.0; // Set the default color to red in case setColour method is not called
         this->green = 0.0;
         this->blue = 0.0;
+        this->pointSize = 1.0;
         srand((unsigned int)time(NULL)); // Seed the randomizer with timestamp.
     }
     
@@ -72,12 +73,19 @@ public:
         this->blue = blue;
     }
     
+    void setPointSize(GLfloat pointSize /**< Point size in pixels */
+                      ) {
+        /// A method to set the pixel draw size of ShapeDrawer object.
+        this->pointSize = pointSize;
+    }
+    
     void drawPixel(GLint x, /**< X coordinate of the pixel to be illuminated */
                    GLint y /**< Y coordinate of the pixel to be illuminated */
                    ) {
         /// A method to illuminate a pixel with given coordinates on screen.
         /** The given pixel is illuminated with the drawing color of the ShapeDrawer object. */
         glColor3f(red, green, blue);
+        glPointSize(pointSize);
         glBegin(GL_POINTS);
         glVertex2i(x,y);
         glEnd();
