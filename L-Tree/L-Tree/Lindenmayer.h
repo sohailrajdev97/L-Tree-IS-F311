@@ -97,8 +97,6 @@ public:
         
         int i,j;
         
-        cout << generation.length();
-        
         if(generation.length() == 0)
         {
             map<string, string>::iterator it;

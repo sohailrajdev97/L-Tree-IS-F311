@@ -35,16 +35,33 @@ void init() {
     
     glutKeyboardFunc(processKeys);
     glutDisplayFunc(draw);
-    
-    glClearColor(0.878, 1.0, 1.0, 0);
-    gluOrtho2D(0, screenWidth, 0, screenHeight);
+   
     glutFullScreen();
     
 }
 
 void draw() {
     
-    glClear(GL_COLOR_BUFFER_BIT);
+    //glClear(GL_COLOR_BUFFER_BIT);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    
+    glBegin(GL_QUADS);
+    //Top
+    glColor3f(0.529,0.807,1.0);
+    glVertex2f(-1.0, 1.0);
+    glVertex2f(1.0, 1.0);
+    
+    //Bottom
+    glColor3f(0.678,0.847,0.7);
+    glVertex2f(1.0, -1.0);
+    glVertex2f(-1.0, -1.0);
+    glEnd();
+    
+    gluOrtho2D(0, screenWidth, 0, screenHeight);
     
     ShapeDrawer sd;
     sd.setColour(0.545, 0.270, 0.074);
