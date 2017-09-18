@@ -51,12 +51,12 @@ void draw() {
     
     glBegin(GL_QUADS);
     //Top
-    glColor3f(0.529,0.807,1.0);
+    glColor3f(1.0,0.807,1.0);
     glVertex2f(-1.0, 1.0);
     glVertex2f(1.0, 1.0);
     
     //Bottom
-    glColor3f(0.678,0.847,0.7);
+    glColor3f(0.678,0.847,0.9);
     glVertex2f(1.0, -1.0);
     glVertex2f(-1.0, -1.0);
     glEnd();
