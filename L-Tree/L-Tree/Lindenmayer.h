@@ -18,7 +18,7 @@ class Lindenmayer {
     
 private:
     
-    int currentX, currentY;
+    int currentX, currentY, iterations;
     double branchLength, pointSize, rotationAngle, branchScaleFactor, pointScaleFactor;
     string axiom, generation;
     map<string, string> rules;
@@ -28,15 +28,17 @@ private:
 public:
     
     // Constructor
-    Lindenmayer(){
+    Lindenmayer(string axiom, int iterations){
         currentX = 0;
         currentY = 0;
-        rotationAngle = 0.0;
+        this->iterations = iterations;
         branchLength = 100;
-        branchScaleFactor = 0.75;
-        generation = "";
         pointSize = 1.0;
+        rotationAngle = 20.0;
+        branchScaleFactor = 0.75;
         pointScaleFactor = 1.0;
+        this->axiom = axiom;
+        generation = "";
     }
     
     // Setters
@@ -50,10 +52,6 @@ public:
     
     void setAngle(double angle){
         rotationAngle = angle;
-    }
-    
-    void setAxiom(string axiom){
-        this->axiom = axiom;
     }
     
     void setBranchLength(double branchLength){
@@ -112,7 +110,7 @@ public:
     }
     
     //Draw Function
-    void draw(int iterations, double colors[][3] = NULL){
+    void draw(double colors[][3] = NULL){
         
         int i,j;
         

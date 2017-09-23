@@ -76,7 +76,7 @@ void draw() {
 
     double leftTreeColors[][3] = {{0.111, 0.111, 0.439}, {0.576, 0.458, 0.858}, {0.545, 0.0, 0.545}};
     
-    Lindenmayer tree;
+    Lindenmayer tree("F", 6);
     tree.setX(0.347*screenWidth);
     tree.setY(screenHeight/8);
     tree.setAngle(22.5);
@@ -84,18 +84,16 @@ void draw() {
     tree.setBranchScaleFactor(0.82);
     tree.setPointSize(3);
     tree.setPointScaleFactor(0.8);
-    tree.setAxiom("F");
     tree.addRule("F=C0F[C1+F][F[C2+F][F][C2-F]][C1-F]");
-    tree.draw(6, leftTreeColors);
+    tree.draw(leftTreeColors);
     
     double rightTreeColors[][3] = {{0.501, 0.0, 0.0}, {0.980, 0.501, 0.4470}, {0.862, 0.078, 0.235}};
     tree.setX(0.6944*screenWidth);
     tree.setY(screenHeight/8);
     tree.setBranchLength(0.065*screenHeight);
-    tree.draw(6, rightTreeColors);
+    tree.draw(rightTreeColors);
     
-    Lindenmayer grass;
-    grass.setAxiom("C0F");
+    Lindenmayer grass("C0F", 1);
     grass.addRule("F=[+F[+F]][-F[-F]]");
     grass.setAngle(25);
     grass.setBranchLength(8);
@@ -104,7 +102,7 @@ void draw() {
     double grassColors[][3] = {{0.25, 0.5, 0.0}};
     for(i=0; i < screenWidth; i = i + 15){
         grass.setX(i);
-        grass.draw(1, grassColors);
+        grass.draw(grassColors);
     }
     glFlush();
     
