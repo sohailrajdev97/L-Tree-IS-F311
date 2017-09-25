@@ -4,7 +4,6 @@
 #include <GL/glut.h>
 #endif
 
-#include <iostream>
 #include "Lindenmayer.h"
 
 void init();
@@ -77,7 +76,7 @@ void draw() {
     double leftTreeColors[][3] = {{0.111, 0.111, 0.439}, {0.576, 0.458, 0.858}, {0.545, 0.0, 0.545}};
     
     Lindenmayer tree("F", 6);
-    tree.setX(0.347*screenWidth);
+    tree.setX(0.27*screenWidth);
     tree.setY(screenHeight/8);
     tree.setAngle(22.5);
     tree.setBranchLength(0.111*screenHeight);
@@ -88,15 +87,30 @@ void draw() {
     tree.draw(leftTreeColors);
     
     double rightTreeColors[][3] = {{0.501, 0.0, 0.0}, {0.980, 0.501, 0.4470}, {0.862, 0.078, 0.235}};
-    tree.setX(0.6944*screenWidth);
+    tree.setX(0.62*screenWidth);
     tree.setY(screenHeight/8);
     tree.setBranchLength(0.065*screenHeight);
     tree.draw(rightTreeColors);
     
+    Lindenmayer sun("[X]++[X]++[X]++[X]++[X]", 5);
+    double sunColors[][3] = {{1.0,0.54,0}, {1.0,0.40,0}};
+    sun.addRule("W=YF++ZF----XF[-YF----WF]++");
+    sun.addRule("X=C0+YF--ZF[C1---WF--XF]+");
+    sun.addRule("Y=-WF++XF[+++YF++ZF]-");
+    sun.addRule("Z=--YF++++WF[+ZF++++XF]--XF");
+    sun.addRule("F=");
+    sun.setY(0.77*screenHeight);
+    sun.setX(0.83*screenWidth);
+    sun.setPointSize(2);
+    sun.setBranchLength(0.01*screenHeight);
+    sun.setBranchScaleFactor(1);
+    sun.setAngle(36);
+    sun.draw(sunColors);
+    
     Lindenmayer grass("C0F", 1);
     grass.addRule("F=[+F[+F]][-F[-F]]");
     grass.setAngle(25);
-    grass.setBranchLength(8);
+    grass.setBranchLength(6);
     grass.setBranchScaleFactor(0.75);
     grass.setY(screenHeight/8);
     double grassColors[][3] = {{0.25, 0.5, 0.0}};

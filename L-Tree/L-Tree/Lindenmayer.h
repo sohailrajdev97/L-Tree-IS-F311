@@ -4,7 +4,6 @@
 #include <string>
 #include <map>
 #include <stack>
-#include <iostream>
 #include "ShapeDrawer.h"
 
 using namespace std;
@@ -195,12 +194,13 @@ public:
         }
         
         size_t length = generation.length();
+
         
         // Setup the drawing variables.
         double currentAngle = 0.0;
         double currentBranchLength = branchLength;
         double currentPointSize = pointSize;
-        double red = 1, green = 1, blue = 1;
+        double red = 1, green = 0, blue = 0;
         
         for(i=0; i < length; i++){
             
@@ -213,8 +213,8 @@ public:
                 sd.drawLineAtAngle(currentX, currentY, 90 - currentAngle, currentBranchLength);
                 
                 //Update the turtle's position to the end of newly drawn line.
-                currentX += currentBranchLength*sin(toRadians(currentAngle));
-                currentY += currentBranchLength*cos(toRadians(currentAngle));
+                currentX += round(currentBranchLength*sin(toRadians(currentAngle)));
+                currentY += round(currentBranchLength*cos(toRadians(currentAngle)));
             }
             
             if(next == '-') // Left rotation
