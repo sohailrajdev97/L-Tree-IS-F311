@@ -8,17 +8,17 @@
 
 using namespace std;
 
-struct turtleState {
-    // A structure to store the turtle's state variables.
-    int x, y;
-    double branchLength, angle, red, green, blue, pointSize;
-};
-
 //! A class to draw Lindenmayer Systems
 
 class Lindenmayer {
     
 private:
+    
+    struct turtleState {
+        // A structure to store the turtle's state variables.
+        int x, y;
+        double branchLength, angle, red, green, blue, pointSize;
+    };
     
     // The use of these has been explained in the corresponding setter methods.
     int currentX, currentY, iterations;
@@ -33,6 +33,7 @@ private:
     
     // A ShapeDrawer object to draw the L-Sytems after calculations have been done.
     ShapeDrawer sd;
+    
 
 public:
     

@@ -15,6 +15,7 @@ int screenWidth, screenHeight;
 int main(int argc, char **argv)
 {
     
+    /// Initialise the glut main window and main loop
     glutInit(&argc, argv);
     init();
     glutMainLoop();
@@ -24,24 +25,25 @@ int main(int argc, char **argv)
 
 void init() {
     
-    screenWidth = glutGet(GLUT_SCREEN_WIDTH);
-    screenHeight = glutGet(GLUT_SCREEN_HEIGHT);
+    screenWidth = glutGet(GLUT_SCREEN_WIDTH); // Get screen width
+    screenHeight = glutGet(GLUT_SCREEN_HEIGHT); // Get screen height
 
     glutInitDisplayMode(GLUT_SINGLE|GLUT_RGB);
-    glutInitWindowPosition(0, 0);
-    glutInitWindowSize(screenWidth, screenHeight);
-    glutCreateWindow("L-Systems");
+    glutInitWindowPosition(0, 0); // Set initial window position
+    glutInitWindowSize(screenWidth, screenHeight); // Set window size
+    glutCreateWindow("L-Systems"); // Create and set a window title
     
-    glutKeyboardFunc(processKeys);
-    glutDisplayFunc(draw);
+    glutKeyboardFunc(processKeys); // Set keyboard event listener
+    glutDisplayFunc(draw); // Hook a display function to window
    
-    glutFullScreen();
+    glutFullScreen(); // Enable full screen mode
     
 }
 
 void draw() {
     
-    //glClear(GL_COLOR_BUFFER_BIT);
+    // Setup background gradient
+    
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     
@@ -49,22 +51,30 @@ void draw() {
     glLoadIdentity();
     
     glBegin(GL_QUADS);
-    //Top
+    
+    //Top Gradient
     glColor3f(1.0,0.807,1.0);
     glVertex2f(-1.0, 1.0);
     glVertex2f(1.0, 1.0);
     
-    //Bottom
+    //Bottom Gradient
     glColor3f(0.678,0.847,0.9);
     glVertex2f(1.0, -1.0);
     glVertex2f(-1.0, -1.0);
     glEnd();
+    
+    /**************************/
+    
+    // Setup ortho 2-D projection matrix.
     
     gluOrtho2D(0, screenWidth, 0, screenHeight);
     
     ShapeDrawer sd;
     sd.setColour(0.545, 0.270, 0.074);
     
+    /**************************/
+    
+    // Draw the land
     int i;
     double gradient = 1.0;
     for(i=0; i < screenHeight/8; i++){
@@ -72,6 +82,10 @@ void draw() {
         gradient -= 4.0/screenHeight;
         sd.drawLine(0, i, screenWidth, i);
     }
+    
+    /**************************/
+    
+    // Draw trees
 
     double leftTreeColors[][3] = {{0.111, 0.111, 0.439}, {0.576, 0.458, 0.858}, {0.545, 0.0, 0.545}};
     
@@ -92,6 +106,10 @@ void draw() {
     tree.setBranchLength(0.065*screenHeight);
     tree.draw(rightTreeColors);
     
+    /**************************/
+    
+    // Draw sun
+    
     Lindenmayer sun("[X]++[X]++[X]++[X]++[X]", 5);
     double sunColors[][3] = {{1.0,0.54,0}, {1.0,0.40,0}};
     sun.addRule("W=YF++ZF----XF[-YF----WF]++");
@@ -107,6 +125,10 @@ void draw() {
     sun.setAngle(36);
     sun.draw(sunColors);
     
+    /**************************/
+    
+    // Draw grass
+    
     Lindenmayer grass("C0F", 1);
     grass.addRule("F=[+F[+F]][-F[-F]]");
     grass.setAngle(25);
@@ -118,15 +140,17 @@ void draw() {
         grass.setX(i);
         grass.draw(grassColors);
     }
+    
+    /**************************/
     glFlush();
     
 }
 
 void processKeys(unsigned char key, int x, int y){
-    
+    // A function to handle key presses.
     switch(key){
         case 27:
-            exit(0);
+            exit(0); // Exit on Esc press
             break;
     }
     
