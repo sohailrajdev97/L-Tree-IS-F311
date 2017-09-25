@@ -218,10 +218,10 @@ public:
                 currentY += round(currentBranchLength*cos(toRadians(currentAngle)));
             }
             
-            if(next == '-') // Left rotation
+            if(next == '-') // Right rotation
                 currentAngle += rotationAngle;
             
-            if(next == '+') // Right rotation
+            if(next == '+') // Left rotation
                 currentAngle -= rotationAngle;
             
             if(next == 'C'){
